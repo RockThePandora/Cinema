@@ -1078,7 +1078,6 @@ namespace Python {
     DEFINE_DLSYM(void, PyGILState_Release, PyGILState_STATE);
 }
 
-#include "pythonlib/shared/Python.hpp"
 #include "pythonlib/shared/Utils/FileUtils.hpp"
 #include "pythonlib/shared/Utils/StringUtils.hpp"
 #include "assets.hpp"
