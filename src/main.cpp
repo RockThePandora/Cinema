@@ -31,7 +31,6 @@
 #include "assets.hpp"
 #include "PythonInternal.hpp"
 #include "CustomLogger.hpp"
-#include "ModInfo.hpp"
 #include "pythonlib/shared/Utils/FileUtils.hpp"
 #include "pythonlib/shared/Utils/StringUtils.hpp"
 
