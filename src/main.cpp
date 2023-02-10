@@ -32,6 +32,7 @@
 #include "pythonlib/shared/Utils/FileUtils.hpp"
 #include "pythonlib/shared/Utils/StringUtils.hpp"
 #include "pythonlib/shared/Python.hpp"
+#include "PythonInternal.hpp"
 
 using namespace UnityEngine;
 using namespace GlobalNamespace;
