@@ -1078,8 +1078,6 @@ namespace Python {
     DEFINE_DLSYM(void, PyGILState_Release, PyGILState_STATE);
 }
 
-
-
 #include "pythonlib/shared/Python.hpp"
 #include "pythonlib/shared/Utils/FileUtils.hpp"
 #include "pythonlib/shared/Utils/StringUtils.hpp"
@@ -1141,4 +1139,5 @@ extern "C" void load() {
     getLogger().info("DownloadVideo Result: %d", DownloadVideo("https://youtu.be/EaswWiwMVs8", [](float percentage) {
         getLogger().info("Download: %f", percentage);
     }));
+}
 }
