@@ -28,12 +28,11 @@
 #include "questui/shared/ArrayUtil.hpp"
 #include "VideoPlayer.hpp"
 #include "custom-types/shared/coroutine.hpp"
-#include "PythonInternal.hpp"
-#include "Python.hpp"
-#include "CustomLogger.hpp"
-#include "Utils/FileUtils.hpp"
 #include "assets.hpp"
-
+#include "pythonlib/PythonInternal.hpp"
+#include "pythonlib/shared/Utils/FileUtils.hpp"
+#include "pythonlib/shared/Utils/StringUtils.hpp"
+#include "pythonlib/shared/Python.hpp"
 
 using namespace UnityEngine;
 using namespace GlobalNamespace;
