@@ -121,9 +121,9 @@ MAKE_HOOK_MATCH(SetupSongUI, &GlobalNamespace::AudioTimeSyncController::StartSon
 
 namespace Python {
         
-    //UnorderedEventCallback<int, char*> PythonWriteEvent;
+    UnorderedEventCallback<int, char*> PythonWriteEvent;
     
-    //bool LoadPythonDirect() {
+    bool LoadPythonDirect() {
         auto pythonPath = FileUtils::getPythonPath();
         auto scriptsPath = FileUtils::getScriptsPath();
         auto pythonHome = pythonPath + "/usr";
@@ -174,21 +174,21 @@ namespace Python {
         return true;
     }
 
-    //bool LoadPython() {
+    bool LoadPython() {
         static std::optional<bool> loaded = std::nullopt;
         if(!loaded.has_value())
             loaded = LoadPythonDirect();
         return loaded.value();
     }
 
-    //void AddNativeModule(PyModuleDef& def) {
+    void AddNativeModule(PyModuleDef& def) {
         PyObject* module = PyModule_Create2(&def, 3);
         PyObject* sys_modules = PyImport_GetModuleDict();
         PyDict_SetItemString(sys_modules, def.m_name, module);
         Py_DecRef(module);
     }
 
-    //bool Load_Dlsym(void* libpython) {
+    bool Load_Dlsym(void* libpython) {
         dlerror();
         Py_None = reinterpret_cast<PyObject*>(dlsym(libpython, "_Py_NoneStruct"));
         auto Py_NoneError = dlerror(); 
