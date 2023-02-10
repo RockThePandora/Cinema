@@ -7,81 +7,8 @@
 
 namespace Python {
         
-    UnorderedEventCallback<int, char*> PythonWriteEvent;
+}
     
-    bool LoadPythonDirect() {
-        auto pythonPath = FileUtils::getPythonPath();
-        auto scriptsPath = FileUtils::getScriptsPath();
-        auto pythonHome = pythonPath + "/usr";
-        LOG_INFO("PythonPath: %s", pythonPath.c_str());
-        if(!direxists(pythonHome)) {
-            mkpath(pythonPath);
-            FileUtils::ExtractZip(IncludedAssets::python_zip, pythonPath);
-        }
-        dlerror();
-        auto libdl = dlopen("libdl.so", RTLD_NOW | RTLD_GLOBAL);
-        auto libdlError = dlerror();
-        if(libdlError) {
-            LOG_ERROR("Couldn't dlopen libdl.so: %s", libdlError);
-            return false;
-        }
-        LOAD_DLSYM(libdl, __loader_android_create_namespace);
-        LOAD_DLSYM(libdl, __loader_android_dlopen_ext);
-
-        auto ns = __loader_android_create_namespace(
-            "python",
-            ("/system/lib64/:/system/product/lib64/:" + pythonHome + "/lib").c_str(),
-            "/system/lib64/",
-            ANDROID_NAMESPACE_TYPE_SHARED |
-            ANDROID_NAMESPACE_TYPE_ISOLATED,
-            "/system/:/data/:/vendor/",
-            NULL);
-        if(!ns) {
-            LOG_ERROR("Couldn't create namespace");
-            return false;
-        }
-        const android_dlextinfo dlextinfo = {
-                .flags = ANDROID_DLEXT_USE_NAMESPACE,
-                .library_namespace = ns,
-                };
-        dlerror();
-        auto libpython = __loader_android_dlopen_ext("libpython3.8.so", RTLD_LOCAL | RTLD_NOW, &dlextinfo);
-        auto libpythonError = dlerror();
-        if(libpythonError) {
-            LOG_ERROR("Couldn't dlopen libpython3.8.so: %s", libpythonError);
-            return false;
-        }
-        if(!Load_Dlsym(libpython)) {
-            return false;
-        }
-        setenv("PYTHONHOME", pythonHome.c_str(), 1);     
-        setenv("PYTHONPATH", scriptsPath.c_str(), 1);     
-        setenv("SSL_CERT_FILE", (pythonHome + "/etc/tls/cert.pem").c_str(), 1); 
-        return true;
-    }
-
-    bool LoadPython() {
-        static std::optional<bool> loaded = std::nullopt;
-        if(!loaded.has_value())
-            loaded = LoadPythonDirect();
-        return loaded.value();
-    }
-
-    void AddNativeModule(PyModuleDef& def) {
-        PyObject* module = PyModule_Create2(&def, 3);
-        PyObject* sys_modules = PyImport_GetModuleDict();
-        PyDict_SetItemString(sys_modules, def.m_name, module);
-        Py_DecRef(module);
-    }
-
-    bool Load_Dlsym(void* libpython) {
-        dlerror();
-        Py_None = reinterpret_cast<PyObject*>(dlsym(libpython, "_Py_NoneStruct"));
-        auto Py_NoneError = dlerror(); 
-        if(Py_NoneError) {
-            LOG_ERROR("Couldn't dlsym %s: %s", "_Py_NoneStruct", Py_NoneError); 
-            return false; 
-        }
 
         LOAD_DLSYM(libpython, PyMarshal_WriteObjectToString);
         LOAD_DLSYM(libpython, PyThread_release_lock);
