@@ -9,7 +9,7 @@
 namespace FileUtils {
 
     const std::string& getPythonPath() {
-        static std::string pythonHome = string_format("%spython", Modloader::getDestinationPath().c_str());
+        //static std::string pythonHome = string_format("%spython", Modloader::getDestinationPath().c_str());
         return pythonHome;
     }
 
