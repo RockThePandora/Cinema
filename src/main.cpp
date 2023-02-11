@@ -33,6 +33,7 @@
 #include "CustomLogger.hpp"
 #include "pythonlib/shared/Utils/FileUtils.hpp"
 #include "pythonlib/shared/Utils/StringUtils.hpp"
+#include "BeatSaverRegionManager.hpp"
 
 using namespace UnityEngine;
 using namespace GlobalNamespace;
@@ -116,6 +117,23 @@ MAKE_HOOK_MATCH(SetupSongUI, &GlobalNamespace::AudioTimeSyncController::StartSon
     videoPlayer->Prepare();
 
     GlobalNamespace::SharedCoroutineStarter::get_instance()->StartCoroutine(custom_types::Helpers::CoroutineHelper::New(coroutine(videoPlayer, self->audioSource)));
+
+    static void RegionLookup(bool force = false) {
+            if(didTheThing && !force)
+                return;
+
+            didTheThing = true;
+            GetJSONAsync(detailsDownloadUrl + "225eb", [](long status, bool error, rapidjson::Document const& result){
+                if (status == 200) {
+                    std::string joe = result["versions"].GetArray()[0]["coverURL"].GetString();
+                    if(joe.length() > 0) {
+                        uri u(joe);
+
+                        coverDownloadUrl = previewDownloadUrl = fmt::format("{}://{}", u.get_scheme(), u.get_host());
+                        return;
+                    }
+                }
+            });
 }
 
 namespace Python {
