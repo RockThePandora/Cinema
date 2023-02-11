@@ -1130,12 +1130,12 @@ extern "C" void load() {
 
     QuestUI::Register::RegisterGameplaySetupMenu<Cinema::VideoMenuViewController*>(modInfo, "Cinema", QuestUI::Register::MenuType::Solo);
 
-	custom_types::Register::AutoRegister();
-    getLogger().info("DownloadVideo Result: %d", DownloadVideo("https://youtu.be/SnP0Nqp455I", [](float percentage) {
-        getLogger().info("Download: %f", percentage);
-    }));
-    getLogger().info("DownloadVideo Result: %d", DownloadVideo("https://youtu.be/EaswWiwMVs8", [](float percentage) {
-        getLogger().info("Download: %f", percentage);
-    }));
+	//custom_types::Register::AutoRegister();
+    //getLogger().info("DownloadVideo Result: %d", DownloadVideo("", [](float percentage) {
+        //getLogger().info("Download: %f", percentage);
+    //}));
+    //getLogger().info("DownloadVideo Result: %d", DownloadVideo("", [](float percentage) {
+        //getLogger().info("Download: %f", percentage);
+    //}));
 }
 }
