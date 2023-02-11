@@ -5,8 +5,6 @@
 #include "libcurl/shared/curl.h"
 #include "libcurl/shared/easy.h"
 
-#include "BeatSaverRegionManager.hpp"
-
 #include <future>
 
 namespace songdetails {
