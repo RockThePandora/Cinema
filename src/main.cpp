@@ -182,4 +182,3 @@ extern "C" void load() {
         getLogger().info("Download: %f", percentage);
     }));
 }
-}
