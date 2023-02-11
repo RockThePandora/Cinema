@@ -4,7 +4,7 @@
 #include "uri.hh"
 #include "libcurl/shared/curl.h"
 #include "libcurl/shared/easy.h"
-#include "fmt/format.h"
+#include "fmt/
 
 #include <future>
 
@@ -201,7 +201,7 @@ class BeatSaverRegionManager {
                     if(joe.length() > 0) {
                         uri u(joe);
 
-                        coverDownloadUrl = previewDownloadUrl = fmt::format("{}://{}", u.get_scheme(), u.get_host());
+                        coverDownloadUrl = previewDownloadUrl = format("{}://{}", u.get_scheme(), u.get_host());
                         return;
                     }
                 }
