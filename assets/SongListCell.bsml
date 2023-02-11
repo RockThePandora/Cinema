@@ -1,4 +1,4 @@
-<vertical id='bgContainer' bg='round-rect-panel' pad='1' pad-bottom='2' horizontal-fit='Unconstrained' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='https://raw.githubusercontent.com/RedBrumbler/Quest-BSML-Docs/gh-pages/schema.xsd'>
+﻿<vertical id='bgContainer' bg='round-rect-panel' pad='1' pad-bottom='2' horizontal-fit='Unconstrained' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='https://raw.githubusercontent.com/RedBrumbler/Quest-BSML-Docs/gh-pages/schema.xsd'>
 	<horizontal spacing='3'>
 		<text id='fullFormattedSongName' align='MidlineLeft' overflow-mode='Ellipsis' word-wrapping='false' rich-text='false'/>
 		<text id='uploadDateFormatted' align='MidlineRight' word-wrapping='false' color='#AAA' rich-text='false'/>
