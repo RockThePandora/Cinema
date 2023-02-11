@@ -33,6 +33,7 @@
 #include "CustomLogger.hpp"
 #include "pythonlib/shared/Utils/FileUtils.hpp"
 #include "pythonlib/shared/Utils/StringUtils.hpp"
+#include "pinkcore/shared/RequirementAPI.hpp"
 
 using namespace UnityEngine;
 using namespace GlobalNamespace;
