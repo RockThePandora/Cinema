@@ -964,3 +964,4 @@ namespace Python {
     DEFINE_DLSYM(int, PyRun_SimpleFileEx, FILE *f, const char *p, int c);
     DEFINE_DLSYM(void, PyGILState_Release, PyGILState_STATE);
 }
+}
