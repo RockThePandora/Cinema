@@ -59,6 +59,11 @@
       "id": "fmt",
       "versionRange": "^9.0.0",
       "additionalData": {}
+    },
+    {
+      "id": "song-details",
+      "versionRange": "^0.2.0",
+      "additionalData": {}
     }
   ],
   "additionalData": {}
