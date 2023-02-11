@@ -4,7 +4,7 @@
 #include "uri.hh"
 #include "libcurl/shared/curl.h"
 #include "libcurl/shared/easy.h"
-#include "fmt/include/fmt/format.h"
+#include "fmt/fmt/format.h"
 
 #include <future>
 
