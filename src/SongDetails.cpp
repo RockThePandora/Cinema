@@ -8,18 +8,6 @@
 #include <future>
 
 class BeatSaverRegionManager {
-  
-                std::string dataString(data);
-                if(dataString.find("[DOWNLOAD]", 0) != -1) {
-                    auto pos = dataString.find("%", 0);
-                    if(pos != -1 && pos > 5) {
-                        auto percentange = dataString.substr(pos-5, 5);
-                        if(percentange.find("]", 0) == 0) 
-                            percentange = percentange.substr(1);
-                        status(std::stof(percentange));
-                    }
-                }
-            }
     
     public:
         static inline const std::string mapDownloadUrlFallback = "https://cdn.beatsaver.com";
