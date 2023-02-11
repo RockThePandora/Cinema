@@ -8,8 +8,7 @@
 #include <future>
 
 class BeatSaverRegionManager {
-    
-    {
+  
                 std::string dataString(data);
                 if(dataString.find("[DOWNLOAD]", 0) != -1) {
                     auto pos = dataString.find("%", 0);
