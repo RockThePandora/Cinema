@@ -8,10 +8,7 @@
 #include <cmath>
 
 namespace SongDetailsCache {
-    namespace Structs {
-        struct SongProto;
-    }
-    struct Song {
+    
         public:
             /// @brief bpm of this map
             const float bpm;
