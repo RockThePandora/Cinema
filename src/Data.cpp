@@ -3,9 +3,8 @@
 #include "song-details/shared/Data/Song.hpp"
 #include <string>
 #include <vector>
-#include "fmt/format.h"
 
-namespace SongDetailsCache {
+using namespace SongDetailsCache; {
 
             /// @return Hexadecimal representation of the Map Hash
             std::string hash() noexcept;
