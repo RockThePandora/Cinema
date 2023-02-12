@@ -10,16 +10,16 @@
 namespace SongDetailsCache {
 
             /// @return Hexadecimal representation of the Map Hash
-            std::string hash() const noexcept;
+            std::string hash() noexcept;
 
             /// @return Song name of this song
-            const std::string& songName() noexcept;
+            std::string& songName() noexcept;
             /// @return Song author name of this song
-            const std::string& songAuthorName() noexcept;
+            std::string& songAuthorName() noexcept;
             /// @return Level author name of this song
-            const std::string& levelAuthorName() noexcept;
+            std::string& levelAuthorName() noexcept;
             /// @return Uploader name of this song
-            const std::string& uploaderName() noexcept;
+            std::string& uploaderName() noexcept;
 
             /// @return Cover url on beatsaver
             std::string coverURL() noexcept;
@@ -27,13 +27,13 @@ namespace SongDetailsCache {
             /// @brief check if this song is the same as the other, by checking the pointer. Since we do not allow copy construction we can just compare pointers (test pls)
             /// @param other the Song to check against
             /// @return equivalency
-            bool operator ==(Song& other) noexcept {
-                return this == &other;
+            //bool operator ==(Song& other) noexcept {
+                //return this == &other;
             }
 
             /// @brief checks if this song is the same as none
-            inline operator bool() noexcept {
-                return this != &SongDifficulty::none;
+            //inline operator bool() noexcept {
+                //return this != &SongDifficulty::none;
             }
 
             /// @brief Helper function to get a difficulty from this song
@@ -64,11 +64,11 @@ namespace SongDetailsCache {
             difficulty_const_iterator begin() noexcept;
             difficulty_const_iterator end() noexcept;
             /// @brief none song, exists to provide an "invalid" song
-            static Song SongDifficulty::none;
+            //static Song SongDifficulty::none;
             /// @brief default move ctor
-            Song(Song&&) = default;
+            //Song(Song&&) = default;
             /// @brief delete copy constructor
-            Song(Song&) = delete;
+            //Song(Song&) = delete;
             /// @brief this needs to be public for specific reasons, but it's not advised to make your own SongDetail::Songs!
             Song(std::size_t index, std::size_t diffOffset, uint8_t diffCount, Structs::SongProto* proto) noexcept;
         private:
