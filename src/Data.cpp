@@ -34,30 +34,29 @@ namespace SongDetailsCache {
             /// @brief checks if this song is the same as none
             //inline operator bool() noexcept {
                 //return this != &SongDifficulty::none;
-            }
 
             /// @brief Helper function to get a difficulty from this song
             /// @param outDiff a reference to the output pointer
             /// @param diff the difficulty to search for
             /// @param characteristic the characteristic to search for
             /// @return whether it was found
-            bool GetDifficulty(SongDifficulty*& outDiff, MapDifficulty diff, MapCharacteristic characteristic = MapCharacteristic::Standard) noexcept;
+            //bool GetDifficulty(SongDifficulty*& outDiff, MapDifficulty diff, MapCharacteristic characteristic = MapCharacteristic::Standard) noexcept;
             /// @brief Helper function to get a difficulty from this song
             /// @param outDiff a reference to the output pointer
             /// @param diff the difficulty to search for
             /// @param characteristic the characteristic to search for as a string
             /// @return whether it was found
-            bool GetDifficulty(SongDifficulty*& outDiff, MapDifficulty diff, std::string_view characteristic) noexcept;
+            //bool GetDifficulty(SongDifficulty*& outDiff, MapDifficulty diff, std::string_view characteristic) noexcept;
             /// @brief Helper function to get a difficulty from this song
             /// @param diff the difficulty to search for
             /// @param characteristic the characteristic to search for
             /// @return The found SongDifficulty, otherwise SongDifficulty::none
-            SongDifficulty& GetDifficulty(MapDifficulty diff, MapCharacteristic characteristic = MapCharacteristic::Standard) noexcept;
+            //SongDifficulty& GetDifficulty(MapDifficulty diff, MapCharacteristic characteristic = MapCharacteristic::Standard) noexcept;
             /// @brief Helper function to get a difficulty from this song
             /// @param diff the difficulty to search for
             /// @param characteristic the characteristic to search for as a string
             /// @return The found SongDifficulty, otherwise SongDifficulty::none
-            SongDifficulty& GetDifficulty(MapDifficulty diff, std::string_view characteristic) noexcept;
+            //SongDifficulty& GetDifficulty(MapDifficulty diff, std::string_view characteristic) noexcept;
 
             // allow iterating all difficulties of this song in a regular foreach loop
             using difficulty_const_iterator = std::vector<SongDifficulty>::const_iterator;
