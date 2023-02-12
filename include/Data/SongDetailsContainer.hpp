@@ -7,7 +7,7 @@
 #include <istream>
 #include <chrono>
 
-#include "Data/Song.hpp"
+#include "song-details/shared/Data/Song.hpp"
 
 namespace SongDetailsCache {
     template<typename T>
