@@ -3,6 +3,7 @@
 #include "song-details/shared/Data/Song.hpp"
 #include <string>
 #include <vector>
+#include "fmt/format.h
 
 namespace SongDetailsCache {
 
