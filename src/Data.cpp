@@ -8,65 +8,6 @@
 #include <cmath>
 
 namespace SongDetailsCache {
-    
-        public:
-            /// @brief bpm of this map
-            const float bpm;
-            /// @brief download count of this map
-            const uint32_t downloadCount;
-            /// @brief upvotes of this map
-            const uint32_t upvotes;
-            /// @brief downvotes of this map
-            const uint32_t downvotes;
-
-            /// @brief get the minimum of some value you want to know the minimum of for all the diffs of this song
-            /// @param func the lambda that returns the value
-            /// @return lowest value found
-            float min(std::function<float(const SongDifficulty&)> func) const;
-            /// @brief get the maximum of some value you want to know the maximum of for all the diffs of this song
-            float max(std::function<float(const SongDifficulty&)> func) const;
-
-            /// @brief calculates the rating for this map based on the downvotes and upvotes
-            float rating() const noexcept;
-            /// @brief Gets the minimum njs for all diffs of this song
-            float minNJS() const noexcept;
-            /// @brief Gets the maximum njs for all diffs of this song
-            float maxNJS() const noexcept;
-            /// @brief Gets the maximum star value in all diffs of this song
-            float minStar() const noexcept;
-            /// @brief Gets the maximum star value in all diffs of this song
-            float maxStar() const noexcept;
-            /// @brief Gets the maximum pp value in all diffs of this song
-            float minPP() const noexcept;
-            /// @brief Gets the maximum pp value in all diffs of this song
-            float maxPP() const noexcept;
-
-            /// @brief Unix timestamp of when the map was uploaded
-            const uint32_t uploadTimeUnix;
-            /// @brief Unix timestamp of when any of the difficulties of this map changed its ranked status
-            const uint32_t rankedChangeUnix;
-
-            /// @brief upload time as system time
-            std::chrono::sys_time<std::chrono::seconds> uploadTime() const noexcept;
-
-            /// @brief Duration of this song in seconds
-            const uint32_t songDurationSeconds;
-            /// @brief song duration as chrono seconds
-            std::chrono::seconds songDuration() const noexcept;
-            /// @brief Index of the Song in the Songs array
-            const std::size_t index;
-            /// @brief Index of the first difficulty of this song in the difficulties array
-            const std::size_t diffOffset;
-            /// @brief Amount of difficulties this song has
-            const uint8_t diffCount;
-
-            /// @return Hexadecimal representation of the Map ID
-            std::string key() const noexcept;
-            /// @return Numeric representation of the Map ID
-            uint32_t mapId() const noexcept;
-
-            /// @brief Ranked status of the map on ScoreSaber
-            const RankedStatus rankedStatus;
 
             /// @return Hexadecimal representation of the Map Hash
             std::string hash() const noexcept;
