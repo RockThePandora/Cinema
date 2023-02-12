@@ -1,8 +1,11 @@
-#include "main.hpp
+#include "main.hpp"
 
 #include "song-details/shared/Data/Song.hpp"
 #include "song-details/shared/Data/MapDifficulty.hpp"
 #include "song-details/shared/Data/RankedStatus.hpp"
+#include <string>
+#include <vector>
+#include <cmath>
 
 namespace SongDetailsCache {
     namespace Structs {
