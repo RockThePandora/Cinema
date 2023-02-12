@@ -25,12 +25,7 @@ namespace SongDetailsCache {
 }
 
             // allow iterating all difficulties of this song in a regular foreach loop
-            using difficulty_const_iterator = std::vector<SongDifficulty>::const_iterator;
+            using difficulty_const_iterator = std::vector<SongDetailsCache::SongDifficulty>::const_iterator;
             difficulty_const_iterator begin() noexcept;
             difficulty_const_iterator end() noexcept;
-
-        private:
-            friend class SongDetailsContainer;
-            friend class SongDetails;
-    };
 }
