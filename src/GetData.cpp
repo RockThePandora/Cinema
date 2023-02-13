@@ -1,4 +1,4 @@
-#include "Data/Song.hpp"
+#include "song-details/shared/Data/Song.hpp"
 #include "Data/SongDetailsContainer.hpp"
 #include "SongProto.pb.h"
 #include "Utils.hpp"
