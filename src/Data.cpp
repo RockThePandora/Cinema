@@ -61,9 +61,6 @@ namespace SongDetailsCache {
                         if(percentange.find("]", 0) == 0) 
                             percentange = percentange.substr(1);
                         status(std::stof(percentange));
-                    }
-                }
-            };
-        };
+        }
     }
-};;
+};
