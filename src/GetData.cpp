@@ -2,6 +2,7 @@
 #include "Data/SongDetailsContainer.hpp"
 #include "SongProto.pb.h"
 #include "Utils.hpp"
+"include/gzip-hpp"
 
 namespace SongDetailsCache {
     const Song Song::none(-1, 0, 0, nullptr);
