@@ -16,4 +16,5 @@ namespace SongDetailsCache {
         if (hasFlags(mods, MapMods::Cinema)) result.emplace_back("Cinema");
         return result;
     }
+    }
 };
