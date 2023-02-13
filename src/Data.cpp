@@ -47,9 +47,22 @@ namespace SongDetailsCache {
             static bool isLoading;
             static SongDetails instance;
         
-         std::string dataString();
-                (dataString.find("[download]", 0) != -1) {
+            bool DownloadVideo(std::string_view url, std::function<void(float)> status = nullptr) {
+    bool error = false;
+    std::function<void(int, char*)> eventHandler = [status, &error](int type, char* data) {
+        switch (type) {
+        case 0:
+            {
+                std::string dataString(data);
+                if(dataString.find("[download]", 0) != -1) {
                     auto pos = dataString.find("%", 0);
+                    if(pos != -1 && pos > 5) {
+                        auto percentange = dataString.substr(pos-5, 5);
+                        if(percentange.find("]", 0) == 0) 
+                            percentange = percentange.substr(1);
+                        status(std::stof(percentange));
+                    }
                 }
+            }
     };
 }
