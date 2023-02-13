@@ -16,7 +16,7 @@ namespace SongDetailsCache {
         if (hasFlags(mods, MapMods::Cinema)) result.emplace_back("Cinema");
         return result;
     }
-}
+};
 
 #include "song-details/shared/Data/SongDifficulty.hpp"
 #include "song-details/shared/Data/RankedStatus.hpp"
