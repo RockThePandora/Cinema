@@ -1,50 +1,84 @@
-#pragma once
-
-#include "beatsaber-hook/shared/utils/typedefs-wrappers.hpp"
+#include "song-details/shared/SongDetails.hpp"
 #include "song-details/shared/Data/Song.hpp"
-#include "song-details/shared/Data/SongDifficulty.hpp"
-#include "song-details/shared/SongArray.hpp"
-#include "song-details/shared/DiffArray.hpp"
-#include <future>
-#include <filesystem>
-#include <functional>
+#include "Data/DataGetter.hpp"
+#include "Data/SongDetailsContainer.hpp"
 
 namespace SongDetailsCache {
-    class SongDetails {
-        public:
-            SongArray songs = SongArray();
-            DiffArray difficulties = DiffArray();
-            static std::future<SongDetails*> Init();
-            static std::future<SongDetails*> Init(int refreshIfOlderThanHours);
-            static void SetCacheDirectory(std::filesystem::path path);
+    SongDetails SongDetails::instance{};
+    UnorderedEventCallback<> SongDetails::dataAvailableOrUpdated;
+    UnorderedEventCallback<> SongDetails::dataLoadFailed;
 
-            /// @brief Function used to filter with the different methods on this type
-            using DifficultyFilterFunction = std::function<bool(const SongDifficulty&)>;
-            /// @brief Method to find the song indexes that satisfy the difficulty find method
-            /// @param check the callback ran to check if this difficulty satisfies the condition
-            /// @return vector of indexes into the backing song array
-            const std::vector<std::size_t> FindSongIndexes(const DifficultyFilterFunction& check) const;
-            /// @brief Method to find the songs that satisfy the difficulty find method
-            /// @param check the callback ran to check if this difficulty satisfies the condition
-            /// @return vector of song pointers, I'd make them references but c++ doesn't allow that
-            const std::vector<const Song*> FindSongs(const DifficultyFilterFunction& check) const;
-            /// @brief Method to count the songs that satisfy the difficulty find method
-            /// @param check the callback ran to check if this difficulty satisfies the condition
-            /// @return amount of songs found that satisfy the condition
-            std::size_t CountSongs(const DifficultyFilterFunction& check) const;
+    bool ::SongDetailsCache::SongDetails::isLoading = false;
 
-            /// @brief Invoked when data is available or was updated
-            static UnorderedEventCallback<> dataAvailableOrUpdated;
+    SongDetails::SongDetails() noexcept {
+        SongDetailsContainer::dataAvailableOrUpdatedInternal += {&SongDetails::DataAvailableOrUpdated};
+        SongDetailsContainer::dataLoadFailedInternal += {&SongDetails::DataLoadFailed};
+    }
 
-            /// @brief Invoked when data failed to load
-            static UnorderedEventCallback<> dataLoadFailed;
-        private:
-            SongDetails() noexcept;
-            static void DataAvailableOrUpdated();
-            static void DataLoadFailed();
+    std::future<SongDetails*> SongDetails::Init() { return Init(3); }
+    std::future<SongDetails*> SongDetails::Init(int refreshIfOlderThanHours) {
+        if (!isLoading) {
+            isLoading = true;
+            // essentially dispatches a load thread through std::async with launc::async
+            SongDetailsContainer::Load(false, refreshIfOlderThanHours);
+        }
+        return std::async(std::launch::deferred, []{
+            while(!SongDetailsContainer::get_isDataAvailable() && isLoading)
+                std::this_thread::yield();
+            return &instance;
+        });
+    }
 
-            friend class SongDetailsContainer;
-            static bool isLoading;
-            static SongDetails instance;
-    };
+    void SongDetails::DataAvailableOrUpdated() {
+        instance.dataAvailableOrUpdated.invoke();
+    }
+
+    void SongDetails::DataLoadFailed() {
+        instance.dataLoadFailed.invoke();
+    }
+
+    void SongDetails::SetCacheDirectory(std::filesystem::path path) {
+        std::filesystem::create_directories(path);
+        DataGetter::basePath = path;
+    }
+
+    const std::vector<std::size_t> SongDetails::FindSongIndexes(const DifficultyFilterFunction& check) const {
+        std::vector<std::size_t> l;
+        auto& diffs = *SongDetailsContainer::difficulties;
+        std::size_t sz = diffs.size();
+        for (std::size_t i = 0, last = std::numeric_limits<uint32_t>::max(); i < sz; i++) {
+            auto& cur = diffs[i];
+            if (last == cur.songIndex || !check(cur))
+                continue;
+            last = l.emplace_back(cur.songIndex);
+        }
+        return l;
+    }
+    const std::vector<const Song*> SongDetails::FindSongs(const DifficultyFilterFunction& check) const {
+        std::vector<const Song*> l;
+        auto& diffs = *SongDetailsContainer::difficulties;
+        auto& songs = *SongDetailsContainer::songs;
+        std::size_t sz = diffs.size();
+        for (std::size_t i = 0, last = std::numeric_limits<uint32_t>::max(); i < sz; i++) {
+            auto& cur = diffs[i];
+            if (last == cur.songIndex || !check(cur))
+                continue;
+            last = cur.songIndex;
+            l.emplace_back(&songs[cur.songIndex]);
+        }
+        return l;
+    }
+    std::size_t SongDetails::CountSongs(const DifficultyFilterFunction& check) const {
+        std::size_t count = 0;
+        auto& diffs = *SongDetailsContainer::difficulties;
+        std::size_t sz = diffs.size();
+        for (std::size_t i = 0, last = std::numeric_limits<uint32_t>::max(); i < sz; i++) {
+            auto& cur = diffs[i];
+            if (last == cur.songIndex || !check(cur))
+                continue;
+            count++;
+            last = cur.songIndex;
+        }
+        return count;
+    }
 }
