@@ -9,6 +9,9 @@
 #include <filesystem>
 #include <functional>
 
+#include "pythonlib/shared/Utils/FileUtils.hpp"
+#include "pythonlib/shared/Utils/StringUtils.hpp"
+
 namespace SongDetailsCache {
     class SongDetails {
         public:
