@@ -63,7 +63,5 @@ namespace SongDetailsCache {
                         status(std::stof(percentange));
                     }
                 }
-            }
     };
-    }
 };
