@@ -15,6 +15,6 @@ namespace SongDetailsCache {
         std::vector<std::string> result{};
         if (hasFlags(mods, MapMods::Cinema)) result.emplace_back("Cinema");
         return result;
-    }
+    };
     }
 };
