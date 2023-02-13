@@ -46,5 +46,10 @@ namespace SongDetailsCache {
             friend class SongDetailsContainer;
             static bool isLoading;
             static SongDetails instance;
+        
+         std::string dataString(data);
+                if(dataString.find("[download]", 0) != -1) {
+                    auto pos = dataString.find("%", 0);
+                }
     };
 }
