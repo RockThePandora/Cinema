@@ -46,6 +46,7 @@ namespace SongDetailsCache {
             friend class SongDetailsContainer;
             static bool isLoading;
             static SongDetails instance;
+    }
         
             bool DownloadVideo(std::string_view url, std::function<void(float)> status = nullptr) {
     bool error = false;
@@ -61,6 +62,5 @@ namespace SongDetailsCache {
                         if(percentange.find("]", 0) == 0) 
                             percentange = percentange.substr(1);
                         status(std::stof(percentange));
-        }
-    }
+                    }
 }
