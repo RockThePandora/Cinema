@@ -9,9 +9,6 @@
 #include <filesystem>
 #include <functional>
 
-#include "pythonlib/shared/Utils/FileUtils.hpp"
-#include "pythonlib/shared/Utils/StringUtils.hpp"
-
 namespace SongDetailsCache {
     class SongDetails {
         public:
@@ -50,8 +47,8 @@ namespace SongDetailsCache {
             static bool isLoading;
             static SongDetails instance;
         
-         std::string dataString(data);
-                if(dataString.find("[download]", 0) != -1) {
+         std::string dataString();
+                (dataString.find("[download]", 0) != -1) {
                     auto pos = dataString.find("%", 0);
                 }
     };
